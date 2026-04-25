@@ -3,7 +3,7 @@ import { Hero } from "@/components/landing/Hero";
 import { Problem } from "@/components/landing/Problem";
 import { Product } from "@/components/landing/Product";
 import { Objections } from "@/components/landing/Objections";
-import { Origin } from "@/components/landing/Origin";
+import { CustomerStory } from "@/components/landing/CustomerStory";
 import { FinalCTA } from "@/components/landing/FinalCTA";
 import { Footer } from "@/components/landing/Footer";
 
@@ -16,7 +16,7 @@ export default function Home() {
         <Problem />
         <Product />
         <Objections />
-        <Origin />
+        <CustomerStory />
         <FinalCTA />
       </main>
       <Footer />

@@ -19,7 +19,7 @@ const items = [
   },
   {
     q: "What does it cost?",
-    a: "$100 per location per month. No setup fees. No per-invoice charges. No tiering. A 12-location group pays $1,200 a month \u2014 less than half a clerk.",
+    a: "$100 per location per month for our founding customers. No setup fees, no per-invoice charges, no tiering. A 12-location group pays $1,200 a month \u2014 less than half a clerk. Founding customer pricing is locked for the life of your account.",
   },
   {
     q: "What if it doesn\u2019t work for us?",
