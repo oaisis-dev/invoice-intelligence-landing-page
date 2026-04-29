@@ -1,0 +1,36 @@
+import { SectionContainer } from "./primitives";
+
+export function FinalCTA() {
+  return (
+    <SectionContainer width="default" className="py-32 md:py-40">
+      <div className="mx-auto max-w-[600px] text-center">
+        <h2 className="font-display text-ink">See it on your invoices.</h2>
+
+        <p className="mx-auto mt-6 max-w-[540px] text-[19px] leading-[1.5] text-ink-secondary">
+          15 minutes. We&rsquo;ll process 10 of your real invoices live on the
+          call. You decide if it&rsquo;s worth a pilot.
+        </p>
+
+        <div className="mt-10">
+          <a
+            href="mailto:chris@useoptimalai.com?subject=Demo request"
+            className="inline-flex items-center rounded-[8px] bg-forest px-8 py-3.5 text-[16px] font-medium text-white transition-colors hover:bg-forest-hover"
+          >
+            Book a demo
+          </a>
+        </div>
+
+        <p className="mt-6 text-[15px] text-ink-muted">
+          Or email{" "}
+          <a
+            href="mailto:chris@useoptimalai.com"
+            className="underline transition-colors hover:text-ink-secondary"
+          >
+            chris@useoptimalai.com
+          </a>{" "}
+          — I read every one.
+        </p>
+      </div>
+    </SectionContainer>
+  );
+}

@@ -25,9 +25,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Invoice Intelligence — The operating system for invoice operations",
+  title: "Invoice Intelligence — invoices, decided.",
   description:
-    "Invoice Intelligence centralizes AP workflows, approvals, document extraction, vendor context, and AI-driven follow-through in one operating system.",
+    "Invoice processing for multi-unit restaurant operators. Reads, codes, and routes every invoice — so your controller closes the books faster, with fewer people.",
 };
 
 export default function RootLayout({
@@ -40,7 +40,7 @@ export default function RootLayout({
       lang="en"
       className={`${instrumentSerif.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-background text-foreground font-sans">
+      <body className="min-h-full bg-canvas text-ink font-sans">
         {children}
       </body>
     </html>
