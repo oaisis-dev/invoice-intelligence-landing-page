@@ -20,6 +20,7 @@
   --border-medium: rgba(20, 20, 20, 0.12);
   --shadow-soft: 0 1px 2px rgba(20, 20, 20, 0.04), 0 8px 24px rgba(20, 20, 20, 0.06);
   --shadow-chip: 0 1px 3px rgba(20, 20, 20, 0.04);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
@@ -176,6 +177,22 @@ h3 {
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   will-change: transform, box-shadow;
+  cursor: default;
+  transition:
+    transform 0.4s var(--ease-smooth),
+    box-shadow 0.4s var(--ease-smooth);
+}
+
+/* On hover, pause the drift and gently scale up. The !important is
+   required because the keyframe is also writing to transform; without
+   it the keyframe's transform wins. */
+.float-chip:hover {
+  animation-play-state: paused;
+  transform: scale(1.08) translateY(-2px) !important;
+  box-shadow:
+    0 2px 4px rgba(20, 20, 20, 0.06),
+    0 24px 48px rgba(20, 20, 20, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
 }
 
 @supports not (backdrop-filter: blur(20px)) {
@@ -269,6 +286,86 @@ h3 {
 }
 
 /* ─────────────────────────────────────────────
+   Primary CTA — subtle scale + shadow lift on hover
+   ───────────────────────────────────────────── */
+
+.cta-primary {
+  transition:
+    background 0.3s var(--ease-smooth),
+    transform 0.3s var(--ease-smooth),
+    box-shadow 0.3s var(--ease-smooth);
+}
+
+.cta-primary:hover {
+  background: var(--forest-bright);
+  transform: translateY(-1px);
+  box-shadow:
+    0 4px 12px rgba(39, 101, 61, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.cta-primary:active {
+  transform: translateY(0);
+}
+
+/* ─────────────────────────────────────────────
+   Nav link — underline grows from left
+   ───────────────────────────────────────────── */
+
+.nav-link {
+  position: relative;
+  transition: color 0.3s var(--ease-smooth);
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--forest);
+  transition: width 0.4s var(--ease-smooth);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link:hover {
+  color: var(--forest);
+}
+
+/* ─────────────────────────────────────────────
+   Customer story — impact number ($200K)
+   ───────────────────────────────────────────── */
+
+.impact-number {
+  display: inline-block;
+  font-weight: 700;
+  color: var(--ink);
+  opacity: 0.3;
+  transform: scale(0.95);
+  transition:
+    opacity 1.2s var(--ease-smooth),
+    color 1.2s var(--ease-smooth),
+    transform 1.2s var(--ease-smooth);
+}
+
+.impact-number-revealed {
+  opacity: 1;
+  color: var(--forest);
+  transform: scale(1);
+  animation: impact-pulse 0.8s var(--ease-smooth) 0.4s;
+}
+
+@keyframes impact-pulse {
+  0%   { transform: scale(0.95); }
+  60%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* ─────────────────────────────────────────────
    Section heading accent — small forest underline
    ───────────────────────────────────────────── */
 
@@ -310,7 +407,10 @@ h3 {
 }
 
 /* ─────────────────────────────────────────────
-   Bento cell — saturated Mist gradient + dual corners
+   Bento cell — saturated Mist gradient + dual corners,
+   scroll-reveal entrance, hover lift.
+   The cell is itself the scroll-reveal target so its
+   transform stack composes entrance + hover cleanly.
    ───────────────────────────────────────────── */
 
 .bento-cell {
@@ -321,6 +421,27 @@ h3 {
     rgba(232, 242, 236, 0.2) 50%,
     #FFFFFF 100%
   );
+  opacity: 0;
+  transform: translateY(24px) scale(0.96);
+  transition:
+    opacity 0.9s var(--ease-smooth),
+    transform 0.9s var(--ease-smooth),
+    box-shadow 0.5s var(--ease-smooth),
+    border-color 0.5s var(--ease-smooth);
+  will-change: opacity, transform;
+}
+
+.bento-cell.scroll-reveal-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.bento-cell:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 1px 3px rgba(20, 20, 20, 0.04),
+    0 24px 48px -12px rgba(20, 20, 20, 0.14),
+    0 0 0 1px rgba(39, 101, 61, 0.1);
 }
 
 .bento-cell::before {
@@ -335,6 +456,7 @@ h3 {
   border-top-left-radius: 16px;
   pointer-events: none;
   z-index: 2;
+  transition: border-color 0.5s var(--ease-smooth);
 }
 
 .bento-cell::after {
@@ -349,6 +471,19 @@ h3 {
   border-bottom-right-radius: 16px;
   pointer-events: none;
   z-index: 2;
+  transition: border-color 0.5s var(--ease-smooth);
+}
+
+.bento-cell:hover::before,
+.bento-cell:hover::after {
+  border-color: var(--forest-bright);
+}
+
+/* Speed up looping illustrations on hover */
+.bento-cell:hover .intake-doc,
+.bento-cell:hover .proc-row,
+.bento-cell:hover .output-row {
+  animation-duration: 2s;
 }
 
 /* ─────────────────────────────────────────────
@@ -458,13 +593,14 @@ h3 {
 }
 
 /* ─────────────────────────────────────────────
-   Fade-up reveal
+   Page-load reveal (above-the-fold) and
+   scroll-reveal (below-the-fold).
    ───────────────────────────────────────────── */
 
 .reveal {
   opacity: 0;
   transform: translateY(14px);
-  animation: reveal 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation: reveal 0.9s var(--ease-smooth) forwards;
 }
 
 @keyframes reveal {
@@ -472,6 +608,20 @@ h3 {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.9s var(--ease-smooth),
+    transform 0.9s var(--ease-smooth);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ─────────────────────────────────────────────
@@ -499,9 +649,14 @@ h3 {
     transform: none !important;
   }
 
-  .reveal {
-    opacity: 1;
-    transform: none;
+  .reveal,
+  .scroll-reveal,
+  .bento-cell,
+  .impact-number {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
   }
 }
 

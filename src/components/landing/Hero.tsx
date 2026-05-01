@@ -1,34 +1,19 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+
 type Tier = "md" | "lg";
 
 type Chip = {
   label: string;
   className: string;
-  /** Negative delay so the chip starts mid-cycle on page load. */
   delay: string;
-  /** Total animation duration. 12–18s, varied per chip. */
   duration: string;
-  /** Which of 4 drift keyframes to use. */
   variant: 1 | 2 | 3 | 4;
-  /**
-   * "md" = visible at 768+ (the four chips that hold the layout when
-   * we drop to a tablet-sized viewport).
-   * "lg" = visible at 1024+ only (filler chips that flesh out the
-   * full eight-chip scatter on desktop).
-   */
   tier: Tier;
   hasDot?: boolean;
 };
 
-/**
- * Eight chips, scattered across the wide left/right margins of the
- * hero. The centered content column is max-w-[1100px] inside a
- * max-w-[1400px] section, leaving the 4–18% bands on each side as
- * the chips' floating canvas.
- *
- * Variants are mixed so adjacent chips don't share keyframes; negative
- * delays put each chip at a different point in its cycle on load, so
- * the cumulative motion looks chaotic, not in-step.
- */
 const chips: Chip[] = [
   // LEFT SIDE (top → bottom)
   {
@@ -122,16 +107,85 @@ function Chip({ label, className, delay, duration, variant, tier, hasDot }: Chip
 }
 
 export function Hero() {
-  return (
-    <section className="relative w-full overflow-hidden bg-dawn">
-      <div className="relative mx-auto w-full max-w-[1400px] px-6 py-20 md:px-10 md:py-32">
-        {/* Floating chips live in the wide canvas around the centered content. */}
-        {chips.map((c) => (
-          <Chip key={c.label} {...c} />
-        ))}
+  const bgRef = useRef<HTMLDivElement>(null);
+  const chipsRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
-        {/* Centered content column */}
-        <div className="relative mx-auto flex max-w-[1100px] flex-col items-center text-center">
+  // Parallax: bg drifts at 0.15x scroll, chips at 0.25x, content at 0.4x.
+  // Effects only run within the first viewport-height of scroll. Refs +
+  // rAF avoid React re-renders during scroll.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      // Disable parallax on small viewports (mobile feels laggy).
+      if (window.innerWidth < 768) {
+        if (bgRef.current) bgRef.current.style.transform = "";
+        if (chipsRef.current) chipsRef.current.style.transform = "";
+        if (contentRef.current) contentRef.current.style.transform = "";
+        return;
+      }
+      const cap = Math.min(window.scrollY, window.innerHeight);
+      if (bgRef.current) {
+        bgRef.current.style.transform = `translate3d(0, ${cap * -0.15}px, 0)`;
+      }
+      if (chipsRef.current) {
+        chipsRef.current.style.transform = `translate3d(0, ${cap * -0.25}px, 0)`;
+      }
+      if (contentRef.current) {
+        contentRef.current.style.transform = `translate3d(0, ${cap * -0.4}px, 0)`;
+      }
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", update, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  return (
+    <section className="relative w-full overflow-hidden">
+      {/* Background — parallax target. Sits behind everything. */}
+      <div
+        ref={bgRef}
+        aria-hidden
+        className="bg-dawn pointer-events-none absolute inset-0 -z-10"
+        style={{ willChange: "transform" }}
+      />
+
+      <div className="relative mx-auto w-full max-w-[1400px] px-6 py-20 md:px-10 md:py-32">
+        {/* Floating chips — separate parallax layer so they drift slower
+            than the headline but faster than the background. */}
+        <div
+          ref={chipsRef}
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{ willChange: "transform" }}
+        >
+          {chips.map((c) => (
+            <Chip key={c.label} {...c} />
+          ))}
+        </div>
+
+        {/* Centered content — the deepest parallax layer. */}
+        <div
+          ref={contentRef}
+          className="relative mx-auto flex max-w-[1100px] flex-col items-center text-center"
+          style={{ willChange: "transform" }}
+        >
           {/* Eyebrow + product pill */}
           <div className="reveal flex flex-col items-center gap-3">
             <span className="text-[13px] font-medium uppercase tracking-[0.06em] text-ink-muted">
@@ -155,7 +209,7 @@ export function Hero() {
           {/* Subheadline */}
           <p
             className="reveal mt-8 max-w-[580px] text-[19px] leading-[1.5] text-ink-secondary"
-            style={{ animationDelay: "0.2s" }}
+            style={{ animationDelay: "0.25s" }}
           >
             Restaurant365 and InfoSync break on real invoices. We don&rsquo;t.
             Read every invoice. Code every line item. Export clean to your GL.
@@ -164,11 +218,11 @@ export function Hero() {
           {/* CTAs */}
           <div
             className="reveal mt-10 flex flex-wrap items-center justify-center gap-3"
-            style={{ animationDelay: "0.3s" }}
+            style={{ animationDelay: "0.4s" }}
           >
             <a
               href="mailto:chris@useoptimalai.com?subject=Demo request"
-              className="inline-flex items-center rounded-[10px] bg-ink px-7 py-3 text-[15px] font-medium text-white transition-colors hover:bg-forest-bright"
+              className="cta-primary inline-flex items-center rounded-[10px] bg-ink px-7 py-3 text-[15px] font-medium text-white"
             >
               Book a 15-minute demo
             </a>
@@ -183,7 +237,7 @@ export function Hero() {
           {/* Trust line */}
           <p
             className="reveal mt-6 text-[13px] text-ink-muted"
-            style={{ animationDelay: "0.4s" }}
+            style={{ animationDelay: "0.55s" }}
           >
             Built for 5–50 location restaurant groups · Works with R365,
             InfoSync, custom GL

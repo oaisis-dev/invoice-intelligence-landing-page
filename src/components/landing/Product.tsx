@@ -1,19 +1,25 @@
 import type { ReactNode } from "react";
 import { SectionContainer } from "./primitives";
+import { ScrollReveal } from "./ScrollReveal";
 
 function BentoCell({
   eyebrow,
   heading,
   body,
   illustration,
+  delay,
 }: {
   eyebrow: string;
   heading: string;
   body: string;
   illustration: ReactNode;
+  delay: number;
 }) {
   return (
-    <div className="bento-cell flex flex-col overflow-hidden rounded-[16px] border border-border-subtle">
+    <ScrollReveal
+      delay={delay}
+      className="bento-cell flex flex-col overflow-hidden rounded-[16px] border border-border-subtle"
+    >
       {/* Top region — text. Flow only, no absolute children. */}
       <div className="px-8 pt-10 pb-6 md:px-10 md:pt-12 md:pb-8">
         <span className="text-[12px] font-medium uppercase tracking-[0.08em] text-ink-muted">
@@ -32,7 +38,7 @@ function BentoCell({
       >
         {illustration}
       </div>
-    </div>
+    </ScrollReveal>
   );
 }
 
@@ -284,30 +290,36 @@ export function Product() {
   return (
     <section className="section-wash w-full bg-canvas">
       <SectionContainer width="xl" className="pt-32 pb-32 md:pt-40">
-        <h2 className="accent-underline mx-auto max-w-[900px] text-center text-ink">
-          Everything your AP team has been waiting for.
-        </h2>
+        <ScrollReveal>
+          <h2 className="accent-underline mx-auto max-w-[900px] text-center text-ink">
+            Everything your AP team has been waiting for.
+          </h2>
+        </ScrollReveal>
 
         <div className="mx-auto mt-20 grid max-w-[1200px] gap-6 md:grid-cols-2">
           <BentoCell
+            delay={0}
             eyebrow="INTAKE"
             heading="One inbox. Every invoice."
             body="Connect Gmail or Outlook once. Every invoice that arrives — PDF, scan, email body, EDI — gets pulled in, parsed, and queued. No forwarding. No uploads."
             illustration={<IntakeIllustration />}
           />
           <BentoCell
+            delay={100}
             eyebrow="PROCESSING"
             heading="Verified, not just extracted."
             body="OCR plus a classification model that learns your chart of accounts. Anomalies flag against vendor history. Your AP clerk reviews exceptions, not every invoice."
             illustration={<ProcessingIllustration />}
           />
           <BentoCell
+            delay={200}
             eyebrow="OUTPUT"
             heading="Clean export. Every system."
             body="R365, InfoSync, NetSuite, QuickBooks, custom CSV. Upload your chart of accounts once. Every processed invoice exports in your exact format."
             illustration={<OutputIllustration />}
           />
           <BentoCell
+            delay={300}
             eyebrow="RECONCILIATION"
             heading="Variance, closed."
             body="Line items match against POs and vendor history. Mismatches surface in a review queue your team clears in seconds. The variance you couldn't explain becomes the variance you can."

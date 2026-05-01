@@ -55,19 +55,19 @@ export function Nav() {
         <div className="flex items-center gap-6">
           <a
             href="#pricing"
-            className="hidden text-[15px] text-ink-secondary transition-colors hover:text-ink sm:inline"
+            className="nav-link hidden text-[15px] text-ink-secondary sm:inline"
           >
             Pricing
           </a>
           <a
             href="mailto:chris@useoptimalai.com"
-            className="hidden text-[15px] text-ink-secondary transition-colors hover:text-ink sm:inline"
+            className="nav-link hidden text-[15px] text-ink-secondary sm:inline"
           >
             Sign in
           </a>
           <a
             href="mailto:chris@useoptimalai.com?subject=Demo request"
-            className="inline-flex items-center rounded-[10px] bg-ink px-5 py-2.5 text-[14px] font-medium text-white transition-colors hover:bg-forest-bright"
+            className="cta-primary inline-flex items-center rounded-[10px] bg-ink px-5 py-2.5 text-[14px] font-medium text-white"
           >
             Book a demo
           </a>

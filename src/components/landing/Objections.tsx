@@ -1,4 +1,5 @@
 import { SectionContainer } from "./primitives";
+import { ScrollReveal } from "./ScrollReveal";
 
 const items = [
   {
@@ -31,20 +32,22 @@ export function Objections() {
   return (
     <section id="pricing" className="section-wash w-full bg-canvas">
       <SectionContainer width="xl" className="pt-32 pb-28 md:pt-40 md:pb-36">
-        <h2 className="accent-underline mx-auto max-w-[800px] text-center text-ink">
-          Yes, we thought of that.
-        </h2>
+        <ScrollReveal>
+          <h2 className="accent-underline mx-auto max-w-[800px] text-center text-ink">
+            Yes, we thought of that.
+          </h2>
+        </ScrollReveal>
 
         <div className="mx-auto mt-16 grid max-w-[1100px] gap-x-12 gap-y-14 md:grid-cols-2">
-          {items.map((item) => (
-            <div key={item.q}>
+          {items.map((item, i) => (
+            <ScrollReveal key={item.q} delay={i * 50}>
               <h3 className="text-[19px] font-medium leading-[1.3] text-ink">
                 {item.q}
               </h3>
               <p className="mt-3 max-w-[460px] text-[16px] leading-[1.6] text-ink-secondary">
                 {item.a}
               </p>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </SectionContainer>
