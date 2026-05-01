@@ -13,7 +13,7 @@ function BentoCell({
   illustration: ReactNode;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-[16px] border border-border-subtle bg-white p-10 md:aspect-[4/3]">
+    <div className="bento-cell relative overflow-hidden rounded-[16px] border border-border-subtle bg-white p-10 md:aspect-[4/3]">
       {/* Text block, top-left */}
       <div className="relative z-10 max-w-[380px]">
         <span className="text-[12px] font-medium uppercase tracking-[0.08em] text-ink-muted">
@@ -262,7 +262,7 @@ export function Product() {
   return (
     <section className="w-full bg-canvas">
       <SectionContainer width="xl" className="py-32">
-        <h2 className="mx-auto max-w-[900px] text-center text-ink">
+        <h2 className="accent-underline mx-auto max-w-[900px] text-center text-ink">
           Everything your AP team has been waiting for.
         </h2>
 

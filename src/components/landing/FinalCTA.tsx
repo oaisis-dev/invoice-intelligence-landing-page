@@ -3,7 +3,7 @@ export function FinalCTA() {
     <section className="w-full bg-dawn-faint">
       <div className="mx-auto w-full max-w-[1100px] px-6 py-32 md:px-10 md:py-40">
         <div className="mx-auto max-w-[700px] text-center">
-          <h2 className="text-ink">See it on your invoices.</h2>
+          <h2 className="accent-underline text-ink">See it on your invoices.</h2>
 
           <p className="mx-auto mt-6 max-w-[540px] text-[19px] leading-[1.5] text-ink-secondary">
             15 minutes. We process 10 of your real invoices live on the call.
@@ -13,7 +13,7 @@ export function FinalCTA() {
           <div className="mt-10">
             <a
               href="mailto:chris@useoptimalai.com?subject=Demo request"
-              className="inline-flex items-center rounded-[10px] bg-ink px-7 py-3 text-[15px] font-medium text-white transition-colors hover:bg-forest"
+              className="inline-flex items-center rounded-[10px] bg-ink px-7 py-3 text-[15px] font-medium text-white transition-colors hover:bg-forest-bright"
             >
               Book a demo
             </a>

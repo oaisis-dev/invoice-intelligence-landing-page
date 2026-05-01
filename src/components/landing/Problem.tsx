@@ -5,7 +5,7 @@ export function Problem() {
     <section className="w-full bg-surface-warm">
       <SectionContainer width="narrow" className="py-28 md:py-36">
         <div className="mx-auto max-w-[720px]">
-          <h2 className="text-ink">
+          <h2 className="accent-underline text-ink">
             You didn&rsquo;t hire a controller to do data entry.
           </h2>
 

@@ -31,7 +31,7 @@ export function Objections() {
   return (
     <section id="pricing" className="w-full bg-surface-warm">
       <SectionContainer width="xl" className="py-28 md:py-36">
-        <h2 className="mx-auto max-w-[800px] text-center text-ink">
+        <h2 className="accent-underline mx-auto max-w-[800px] text-center text-ink">
           Yes, we thought of that.
         </h2>
 

@@ -26,7 +26,7 @@ export function Nav() {
           </a>
           <a
             href="mailto:chris@useoptimalai.com?subject=Demo request"
-            className="inline-flex items-center rounded-[10px] bg-ink px-5 py-2.5 text-[14px] font-medium text-white transition-colors hover:bg-forest"
+            className="inline-flex items-center rounded-[10px] bg-ink px-5 py-2.5 text-[14px] font-medium text-white transition-colors hover:bg-forest-bright"
           >
             Book a demo
           </a>
