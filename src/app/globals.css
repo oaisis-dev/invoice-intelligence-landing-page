@@ -12,7 +12,6 @@
   --ink-secondary: #404040;
   --ink-muted: #777777;            /* per brand guide muted */
   --ink-light-muted: #AAAAAA;     /* per brand guide light-muted */
-  --ink-strikethrough: #A8A8A8;
   --forest: #27653D;               /* primary */
   --forest-deep: #1E5030;          /* accent / depth */
   --forest-bright: #2D7A48;        /* hover destinations / dark mode primary */
@@ -31,7 +30,6 @@
   --color-ink-secondary: var(--ink-secondary);
   --color-ink-muted: var(--ink-muted);
   --color-ink-light-muted: var(--ink-light-muted);
-  --color-ink-strikethrough: var(--ink-strikethrough);
   --color-forest: var(--forest);
   --color-forest-deep: var(--forest-deep);
   --color-forest-bright: var(--forest-bright);
@@ -147,20 +145,6 @@ h3 {
 .section-wash > * {
   position: relative;
   z-index: 1;
-}
-
-/* ─────────────────────────────────────────────
-   Strikethrough word in hero headline
-   ───────────────────────────────────────────── */
-
-.strike-word {
-  position: relative;
-  color: var(--ink-strikethrough);
-  text-decoration: line-through;
-  text-decoration-thickness: 0.06em;
-  text-decoration-color: var(--ink-strikethrough);
-  text-underline-offset: 0;
-  font-weight: 600;
 }
 
 /* ─────────────────────────────────────────────

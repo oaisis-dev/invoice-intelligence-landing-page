@@ -201,9 +201,7 @@ export function Hero() {
             className="reveal mt-10 max-w-[900px] text-ink"
             style={{ animationDelay: "0.1s" }}
           >
-            AP automation built{" "}
-            <span className="strike-word">for</span>{" "}
-            <span className="text-ink">by</span> people who run restaurants.
+            Finally. Clean, sharp invoice processing.
           </h1>
 
           {/* Subheadline */}
