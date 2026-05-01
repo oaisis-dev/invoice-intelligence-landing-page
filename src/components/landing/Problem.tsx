@@ -3,7 +3,7 @@ import { ScrollReveal } from "./ScrollReveal";
 
 export function Problem() {
   return (
-    <section className="section-wash w-full bg-problem-halo">
+    <section className="w-full bg-transparent">
       <SectionContainer width="narrow" className="pt-32 pb-28 md:pt-40 md:pb-36">
         <div className="mx-auto max-w-[720px]">
           <ScrollReveal>

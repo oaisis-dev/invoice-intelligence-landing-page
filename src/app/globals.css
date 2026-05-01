@@ -90,9 +90,35 @@ h3 {
 }
 
 /* ─────────────────────────────────────────────
-   Hero atmosphere — Mist canopy, twin forest washes
+   Page-level unified atmosphere
+   Fixed-attached so it stays in place as you scroll —
+   sections are transparent and float over this surface,
+   eliminating hard between-section breaks.
    ───────────────────────────────────────────── */
 
+.bg-page {
+  background:
+    radial-gradient(ellipse 1400px 900px at 50% 8%, rgba(232, 242, 236, 0.6) 0%, transparent 50%),
+    radial-gradient(ellipse 1200px 800px at 20% 40%, rgba(45, 122, 72, 0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 1100px 700px at 80% 65%, rgba(39, 101, 61, 0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 1300px 800px at 50% 90%, rgba(232, 242, 236, 0.5) 0%, transparent 50%),
+    var(--canvas);
+  background-attachment: fixed;
+}
+
+/* iOS Safari + most mobile browsers handle background-attachment: fixed
+   poorly (jank during scroll). Fall back to scroll-attached at <=768px;
+   the gradient still renders, just not viewport-pinned. */
+@media (max-width: 768px) {
+  .bg-page {
+    background-attachment: scroll;
+  }
+}
+
+/* Hero atmosphere — Mist canopy, twin forest washes.
+   Layered ON TOP of the page-level gradient so the hero reads as the
+   richest atmospheric moment without creating a hard break when its
+   gradient scrolls out of view. */
 .bg-dawn {
   background:
     radial-gradient(ellipse 1300px 700px at 50% -10%, rgba(232, 242, 236, 0.85) 0%, transparent 50%),
@@ -108,43 +134,6 @@ h3 {
     radial-gradient(ellipse 900px 500px at 50% 50%, rgba(232, 242, 236, 0.7) 0%, transparent 60%),
     radial-gradient(ellipse 700px 400px at 50% 80%, rgba(39, 101, 61, 0.10) 0%, transparent 60%),
     var(--canvas);
-}
-
-/* Problem section — soft green halo */
-.bg-problem-halo {
-  background:
-    radial-gradient(ellipse 1200px 800px at 50% 50%, rgba(232, 242, 236, 0.5) 0%, transparent 70%),
-    var(--canvas);
-}
-
-/* ─────────────────────────────────────────────
-   Section wash — soft Mist gradient at section top
-   Bridges adjacent sections without hard color breaks.
-   ───────────────────────────────────────────── */
-
-.section-wash {
-  position: relative;
-}
-
-.section-wash::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 200px;
-  background: linear-gradient(
-    to bottom,
-    rgba(232, 242, 236, 0.4) 0%,
-    rgba(232, 242, 236, 0) 100%
-  );
-  pointer-events: none;
-  z-index: 0;
-}
-
-.section-wash > * {
-  position: relative;
-  z-index: 1;
 }
 
 /* ─────────────────────────────────────────────

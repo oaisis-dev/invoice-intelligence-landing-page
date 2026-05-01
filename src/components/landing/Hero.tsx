@@ -157,16 +157,18 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative w-full overflow-hidden">
-      {/* Background — parallax target. Sits behind everything. */}
+    <section className="relative isolate w-full overflow-hidden">
+      {/* Background — parallax target. Sits behind everything inside the
+          section. `isolate` on the section creates a stacking context so
+          this z-0 layer never escapes behind the page-level background. */}
       <div
         ref={bgRef}
         aria-hidden
-        className="bg-dawn pointer-events-none absolute inset-0 -z-10"
+        className="bg-dawn pointer-events-none absolute inset-0 z-0"
         style={{ willChange: "transform" }}
       />
 
-      <div className="relative mx-auto w-full max-w-[1400px] px-6 py-20 md:px-10 md:py-32">
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 py-20 md:px-10 md:py-32">
         {/* Floating chips — separate parallax layer so they drift slower
             than the headline but faster than the background. */}
         <div

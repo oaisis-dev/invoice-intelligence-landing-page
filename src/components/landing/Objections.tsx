@@ -30,7 +30,7 @@ const items = [
 
 export function Objections() {
   return (
-    <section id="pricing" className="section-wash w-full bg-canvas">
+    <section id="pricing" className="w-full bg-transparent">
       <SectionContainer width="xl" className="pt-32 pb-28 md:pt-40 md:pb-36">
         <ScrollReveal>
           <h2 className="accent-underline mx-auto max-w-[800px] text-center text-ink">

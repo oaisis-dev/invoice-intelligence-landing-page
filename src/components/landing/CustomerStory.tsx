@@ -4,7 +4,7 @@ import { CustomerStoryHeadline } from "./CustomerStoryHeadline";
 
 export function CustomerStory() {
   return (
-    <section className="w-full bg-canvas">
+    <section className="w-full bg-transparent">
       <SectionContainer width="narrow" className="pt-32 pb-28 md:pt-40 md:pb-36">
         <div className="mx-auto max-w-[720px]">
           <ScrollReveal>

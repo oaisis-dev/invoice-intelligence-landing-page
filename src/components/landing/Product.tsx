@@ -288,7 +288,7 @@ function ReconciliationIllustration() {
 
 export function Product() {
   return (
-    <section className="section-wash w-full bg-canvas">
+    <section className="w-full bg-transparent">
       <SectionContainer width="xl" className="pt-32 pb-32 md:pt-40">
         <ScrollReveal>
           <h2 className="accent-underline mx-auto max-w-[900px] text-center text-ink">
