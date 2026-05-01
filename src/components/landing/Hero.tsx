@@ -1,105 +1,108 @@
-type Tier = "md" | "lg";
+type Tier = "md" | "xl";
 
 type Chip = {
   label: string;
   className: string;
   /** Negative delay so the chip starts mid-cycle on page load. */
   delay: string;
-  /** Total animation duration. Varied per chip so motion never syncs. */
+  /** Total animation duration. 12–18s per spec. */
   duration: string;
   /** Which of 4 drift keyframes to use. */
   variant: 1 | 2 | 3 | 4;
   /**
    * "md" = visible at 768+ (vendor chips, four-corner anchor).
-   * "lg" = visible at 1024+ only (line-item and GL chips — longer labels
-   * that would crowd the headline at narrower widths).
+   * "xl" = visible at 1280+ only (line-item and GL chips — longer
+   * labels that would crowd the headline at narrower widths).
    */
   tier: Tier;
   hasDot?: boolean;
 };
 
 /**
- * 8 chips total. At md (768–1023): only the 4 vendor-name chips show,
- * pinned to the four corners of the hero so they never crowd the
- * centered headline. At lg+ (1024+): the 4 line-item and GL chips
- * appear in the side margins, filling out the scattered layout.
+ * 8 chips, all positioned in the top and bottom bands of the hero
+ * (above the eyebrow / below the trust line) so the dramatic 38px-Y
+ * drift never carries them into the headline or CTA region. The 4
+ * vendor chips anchor the corners and show at md+; the 4 line-item /
+ * GL chips fill the inner top/bottom bands and only show at xl+.
  */
 const chips: Chip[] = [
-  // Vendor names — always show at md+
+  // Top band — corners (md+)
   {
     label: "Sysco Foods",
     hasDot: true,
     tier: "md",
-    className: "top-[8%] left-[2%] xl:left-[4%]",
+    className: "top-[6%] left-[1%] xl:left-[3%]",
     variant: 1,
-    duration: "11s",
+    duration: "13s",
     delay: "-2s",
   },
   {
     label: "US Foods · INV-44218",
     hasDot: true,
     tier: "md",
-    className: "top-[10%] right-[2%] xl:right-[4%]",
+    className: "top-[8%] right-[1%] xl:right-[3%]",
     variant: 4,
-    duration: "14s",
+    duration: "16s",
     delay: "-9s",
   },
+  // Top band — middles (xl+)
+  {
+    label: "GL: 5010-PROTEIN",
+    tier: "xl",
+    className: "top-[3%] left-[20%] xl:left-[24%]",
+    variant: 2,
+    duration: "15s",
+    delay: "-7s",
+  },
+  {
+    label: "GL: 5020-PRODUCE",
+    tier: "xl",
+    className: "top-[3%] right-[20%] xl:right-[24%]",
+    variant: 3,
+    duration: "14s",
+    delay: "-4s",
+  },
+  // Bottom band — corners (md+)
   {
     label: "Performance Food Group",
     hasDot: true,
     tier: "md",
-    className: "top-[62%] right-[0%] xl:right-[2%]",
+    className: "bottom-[8%] left-[1%] xl:left-[3%]",
     variant: 1,
-    duration: "10s",
+    duration: "12s",
     delay: "-1s",
   },
   {
     label: "Ben E. Keith · INV-92301",
     hasDot: true,
     tier: "md",
-    className: "bottom-[10%] right-[16%] xl:right-[20%]",
+    className: "bottom-[10%] right-[1%] xl:right-[3%]",
     variant: 4,
-    duration: "11s",
+    duration: "14s",
     delay: "-8s",
   },
-  // Line-item + GL — only at lg+
-  {
-    label: "GL: 5010-PROTEIN",
-    tier: "lg",
-    className: "top-[34%] left-[0%] xl:left-[2%]",
-    variant: 2,
-    duration: "13s",
-    delay: "-7s",
-  },
+  // Bottom band — middles (xl+)
   {
     label: "Atlantic Salmon · $612.00",
-    tier: "lg",
-    className: "top-[60%] left-[4%] xl:left-[6%]",
+    tier: "xl",
+    className: "bottom-[5%] left-[22%] xl:left-[26%]",
     variant: 3,
-    duration: "9s",
-    delay: "-4s",
-  },
-  {
-    label: "GL: 5020-PRODUCE",
-    tier: "lg",
-    className: "top-[36%] right-[0%] xl:right-[2%]",
-    variant: 2,
-    duration: "12s",
-    delay: "-6s",
+    duration: "17s",
+    delay: "-3s",
   },
   {
     label: "Beef Tenderloin · $890.00",
-    tier: "lg",
-    className: "bottom-[8%] left-[18%] xl:left-[22%]",
-    variant: 3,
-    duration: "8s",
-    delay: "-3s",
+    tier: "xl",
+    className: "bottom-[5%] right-[22%] xl:right-[26%]",
+    variant: 2,
+    duration: "18s",
+    delay: "-11s",
   },
 ];
 
 function Chip({ label, className, delay, duration, variant, tier, hasDot }: Chip) {
   const visibility =
-    tier === "md" ? "hidden md:inline-flex" : "hidden lg:inline-flex";
+    tier === "md" ? "hidden md:inline-flex" : "hidden xl:inline-flex";
   return (
     <div
       className={`float-chip float-chip-${variant} absolute ${visibility} items-center gap-2 rounded-full px-3 py-1.5 text-[12px] font-medium text-ink-secondary ${className}`}
@@ -109,10 +112,7 @@ function Chip({ label, className, delay, duration, variant, tier, hasDot }: Chip
       }}
     >
       {hasDot ? (
-        <span
-          aria-hidden
-          className="chip-dot inline-block size-1.5 rounded-full bg-forest"
-        />
+        <span aria-hidden className="chip-dot inline-block" />
       ) : null}
       {label}
     </div>

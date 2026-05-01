@@ -196,7 +196,10 @@ function OutputIllustration() {
             <div className="px-2 py-1.5 truncate">{r.amt}</div>
             <div className="px-2 py-1.5 truncate">{r.gl}</div>
             <div className="px-1 py-1">
-              <span className="inline-flex items-center rounded-[3px] bg-mist px-1.5 py-0.5 text-[9px] font-medium text-forest-bright">
+              <span
+                className="inline-flex items-center rounded-[3px] px-1.5 py-0.5 text-[9px] font-medium text-forest-bright"
+                style={{ background: "rgba(217, 230, 200, 0.6)" }}
+              >
                 Posted
               </span>
             </div>

@@ -1,20 +1,15 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-/**
- * Outfit — primary typeface per Invoice Intelligence brand guide.
- * Geometric humanist sans, similar weight footprint to Inter but with
- * rounder, more confident letterforms.
- */
-const outfit = Outfit({
+const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
   variable: "--font-display",
   display: "swap",
 });
 
-const outfitBody = Outfit({
+const interBody = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
   variable: "--font-body",
@@ -35,7 +30,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${outfitBody.variable} h-full antialiased`}
+      className={`${inter.variable} ${interBody.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-canvas text-ink font-sans">
         {children}

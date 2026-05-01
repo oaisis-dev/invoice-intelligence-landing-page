@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="56" height="76" viewBox="0 0 56 76" fill="none">
+  <defs>
+    <mask id="favicon-mask">
+      <rect width="56" height="76" fill="white"/>
+      <g transform="translate(28,42)">
+        <path d="M0 -18 C2 -6 6 -2 18 0 C6 2 2 6 0 18 C-2 6 -6 2 -18 0 C-6 -2 -2 -6 0 -18 Z" fill="black"/>
+      </g>
+    </mask>
+  </defs>
+  <g mask="url(#favicon-mask)">
+    <path d="M4 10 C4 6.134 7.134 3 11 3 L32 3 L50 21 L50 62 C50 65.866 46.866 69 43 69 L11 69 C7.134 69 4 65.866 4 62 Z" fill="#27653D"/>
+    <path d="M32 3 L32 15 C32 18.3137 34.6863 21 38 21 L50 21 Z" fill="#1E5030"/>
+  </g>
+</svg>
