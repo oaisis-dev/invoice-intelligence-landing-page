@@ -1,108 +1,110 @@
-type Tier = "md" | "xl";
+type Tier = "md" | "lg";
 
 type Chip = {
   label: string;
   className: string;
   /** Negative delay so the chip starts mid-cycle on page load. */
   delay: string;
-  /** Total animation duration. 12–18s per spec. */
+  /** Total animation duration. 12–18s, varied per chip. */
   duration: string;
   /** Which of 4 drift keyframes to use. */
   variant: 1 | 2 | 3 | 4;
   /**
-   * "md" = visible at 768+ (vendor chips, four-corner anchor).
-   * "xl" = visible at 1280+ only (line-item and GL chips — longer
-   * labels that would crowd the headline at narrower widths).
+   * "md" = visible at 768+ (the four chips that hold the layout when
+   * we drop to a tablet-sized viewport).
+   * "lg" = visible at 1024+ only (filler chips that flesh out the
+   * full eight-chip scatter on desktop).
    */
   tier: Tier;
   hasDot?: boolean;
 };
 
 /**
- * 8 chips, all positioned in the top and bottom bands of the hero
- * (above the eyebrow / below the trust line) so the dramatic 38px-Y
- * drift never carries them into the headline or CTA region. The 4
- * vendor chips anchor the corners and show at md+; the 4 line-item /
- * GL chips fill the inner top/bottom bands and only show at xl+.
+ * Eight chips, scattered across the wide left/right margins of the
+ * hero. The centered content column is max-w-[1100px] inside a
+ * max-w-[1400px] section, leaving the 4–18% bands on each side as
+ * the chips' floating canvas.
+ *
+ * Variants are mixed so adjacent chips don't share keyframes; negative
+ * delays put each chip at a different point in its cycle on load, so
+ * the cumulative motion looks chaotic, not in-step.
  */
 const chips: Chip[] = [
-  // Top band — corners (md+)
+  // LEFT SIDE (top → bottom)
   {
     label: "Sysco Foods",
     hasDot: true,
     tier: "md",
-    className: "top-[6%] left-[1%] xl:left-[3%]",
+    className: "top-[18%] left-[8%]",
     variant: 1,
+    duration: "14s",
+    delay: "-8s",
+  },
+  {
+    label: "Beef Tenderloin · $890.00",
+    tier: "lg",
+    className: "top-[38%] left-[4%]",
+    variant: 3,
+    duration: "16s",
+    delay: "-4s",
+  },
+  {
+    label: "GL: 5010-PROTEIN",
+    tier: "md",
+    className: "top-[62%] left-[12%]",
+    variant: 2,
     duration: "13s",
+    delay: "-11s",
+  },
+  {
+    label: "Atlantic Salmon · $612.00",
+    tier: "lg",
+    className: "top-[82%] left-[6%]",
+    variant: 4,
+    duration: "15s",
     delay: "-2s",
   },
+  // RIGHT SIDE (top → bottom)
   {
     label: "US Foods · INV-44218",
     hasDot: true,
-    tier: "md",
-    className: "top-[8%] right-[1%] xl:right-[3%]",
-    variant: 4,
-    duration: "16s",
-    delay: "-9s",
-  },
-  // Top band — middles (xl+)
-  {
-    label: "GL: 5010-PROTEIN",
-    tier: "xl",
-    className: "top-[3%] left-[20%] xl:left-[24%]",
+    tier: "lg",
+    className: "top-[22%] right-[6%]",
     variant: 2,
-    duration: "15s",
-    delay: "-7s",
+    duration: "17s",
+    delay: "-6s",
   },
-  {
-    label: "GL: 5020-PRODUCE",
-    tier: "xl",
-    className: "top-[3%] right-[20%] xl:right-[24%]",
-    variant: 3,
-    duration: "14s",
-    delay: "-4s",
-  },
-  // Bottom band — corners (md+)
   {
     label: "Performance Food Group",
     hasDot: true,
     tier: "md",
-    className: "bottom-[8%] left-[1%] xl:left-[3%]",
-    variant: 1,
+    className: "top-[44%] right-[10%]",
+    variant: 4,
     duration: "12s",
-    delay: "-1s",
+    delay: "-9s",
+  },
+  {
+    label: "GL: 5020-PRODUCE",
+    tier: "lg",
+    className: "top-[66%] right-[4%]",
+    variant: 1,
+    duration: "18s",
+    delay: "-3s",
   },
   {
     label: "Ben E. Keith · INV-92301",
     hasDot: true,
     tier: "md",
-    className: "bottom-[10%] right-[1%] xl:right-[3%]",
-    variant: 4,
-    duration: "14s",
-    delay: "-8s",
-  },
-  // Bottom band — middles (xl+)
-  {
-    label: "Atlantic Salmon · $612.00",
-    tier: "xl",
-    className: "bottom-[5%] left-[22%] xl:left-[26%]",
+    className: "top-[84%] right-[8%]",
     variant: 3,
-    duration: "17s",
-    delay: "-3s",
-  },
-  {
-    label: "Beef Tenderloin · $890.00",
-    tier: "xl",
-    className: "bottom-[5%] right-[22%] xl:right-[26%]",
-    variant: 2,
-    duration: "18s",
-    delay: "-11s",
+    duration: "14s",
+    delay: "-7s",
   },
 ];
 
 function Chip({ label, className, delay, duration, variant, tier, hasDot }: Chip) {
   const visibility =
-    tier === "md" ? "hidden md:inline-flex" : "hidden xl:inline-flex";
+    tier === "md" ? "hidden md:inline-flex" : "hidden lg:inline-flex";
   return (
     <div
       className={`float-chip float-chip-${variant} absolute ${visibility} items-center gap-2 rounded-full px-3 py-1.5 text-[12px] font-medium text-ink-secondary ${className}`}
