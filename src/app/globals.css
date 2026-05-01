@@ -1,37 +1,38 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────────
-   Design tokens — Invoice Intelligence v3
-   Whitespace, dawn light, near-black ink.
-   Aesthetic anchor: Gumloop.
+   Design tokens — Invoice Intelligence brand palette
+   Source: Invoice Intelligence brand guide
    ───────────────────────────────────────────── */
 :root {
-  --canvas: #FAFAF8;
+  --canvas: #F6F5F2;              /* warm white per brand guide */
   --surface: #FFFFFF;
-  --surface-warm: #F5F4F1;
-  --ink: #0A0A0A;
+  --mist: #E8F2EC;                /* light green-tinted accent surface */
+  --ink: #141414;                  /* per brand guide */
   --ink-secondary: #404040;
-  --ink-muted: #737373;
+  --ink-muted: #777777;            /* per brand guide muted */
+  --ink-light-muted: #AAAAAA;     /* per brand guide light-muted */
   --ink-strikethrough: #A8A8A8;
-  --forest: #27653D;
-  --forest-hover: #1F5230;
-  --forest-bright: #2F7D49;
-  --border-subtle: rgba(10, 10, 10, 0.06);
-  --border-medium: rgba(10, 10, 10, 0.12);
-  --shadow-soft: 0 1px 2px rgba(10, 10, 10, 0.04), 0 8px 24px rgba(10, 10, 10, 0.06);
-  --shadow-chip: 0 1px 3px rgba(10, 10, 10, 0.04);
+  --forest: #27653D;               /* primary */
+  --forest-deep: #1E5030;          /* accent / depth */
+  --forest-bright: #2D7A48;        /* hover destinations / dark mode primary */
+  --border-subtle: #E8E7E4;        /* per brand guide */
+  --border-medium: rgba(20, 20, 20, 0.12);
+  --shadow-soft: 0 1px 2px rgba(20, 20, 20, 0.04), 0 8px 24px rgba(20, 20, 20, 0.06);
+  --shadow-chip: 0 1px 3px rgba(20, 20, 20, 0.04);
 }
 
 @theme inline {
   --color-canvas: var(--canvas);
   --color-surface: var(--surface);
-  --color-surface-warm: var(--surface-warm);
+  --color-mist: var(--mist);
   --color-ink: var(--ink);
   --color-ink-secondary: var(--ink-secondary);
   --color-ink-muted: var(--ink-muted);
+  --color-ink-light-muted: var(--ink-light-muted);
   --color-ink-strikethrough: var(--ink-strikethrough);
   --color-forest: var(--forest);
-  --color-forest-hover: var(--forest-hover);
+  --color-forest-deep: var(--forest-deep);
   --color-forest-bright: var(--forest-bright);
   --color-border-subtle: var(--border-subtle);
   --color-border-medium: var(--border-medium);
@@ -90,29 +91,58 @@ h3 {
 }
 
 /* ─────────────────────────────────────────────
-   Dawn gradient — soft early-morning wash
+   Hero atmosphere — Mist top, soft Forest underglow
    ───────────────────────────────────────────── */
 
 .bg-dawn {
   background:
-    radial-gradient(ellipse 1200px 600px at 20% 0%, rgba(186, 209, 230, 0.35) 0%, transparent 60%),
-    radial-gradient(ellipse 1000px 500px at 80% 10%, rgba(245, 219, 230, 0.28) 0%, transparent 55%),
-    radial-gradient(ellipse 900px 500px at 50% 60%, rgba(39, 101, 61, 0.10) 0%, transparent 55%),
-    radial-gradient(ellipse 800px 400px at 50% 100%, rgba(255, 235, 210, 0.20) 0%, transparent 50%),
+    radial-gradient(ellipse 1100px 600px at 25% 0%, rgba(232, 242, 236, 0.55) 0%, transparent 60%),
+    radial-gradient(ellipse 900px 500px at 80% 15%, rgba(45, 122, 72, 0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 800px 400px at 50% 90%, rgba(39, 101, 61, 0.06) 0%, transparent 50%),
     var(--canvas);
 }
 
+/* Fainter version for the FinalCTA bookend */
 .bg-dawn-faint {
   background:
-    radial-gradient(ellipse 1100px 500px at 30% 0%, rgba(186, 209, 230, 0.22) 0%, transparent 65%),
-    radial-gradient(ellipse 900px 450px at 75% 100%, rgba(245, 219, 230, 0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 700px 350px at 50% 50%, rgba(255, 235, 210, 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 1000px 500px at 30% 0%, rgba(232, 242, 236, 0.35) 0%, transparent 65%),
+    radial-gradient(ellipse 800px 450px at 75% 100%, rgba(45, 122, 72, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 700px 350px at 50% 50%, rgba(39, 101, 61, 0.04) 0%, transparent 55%),
     var(--canvas);
 }
 
 /* ─────────────────────────────────────────────
+   Section wash — soft Mist gradient at section top
+   Bridges adjacent sections without hard color breaks.
+   ───────────────────────────────────────────── */
+
+.section-wash {
+  position: relative;
+}
+
+.section-wash::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(
+    to bottom,
+    rgba(232, 242, 236, 0.4) 0%,
+    rgba(232, 242, 236, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-wash > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─────────────────────────────────────────────
    Strikethrough word in hero headline
-   The line should feel like an editing mark, not a typo.
    ───────────────────────────────────────────── */
 
 .strike-word {
@@ -126,9 +156,8 @@ h3 {
 }
 
 /* ─────────────────────────────────────────────
-   Floating hero chip — glossy glass + drifting motion
-   Four keyframe variants, each chip on its own duration
-   and (negative) delay so motion never visibly syncs.
+   Floating hero chip — glossy glass + tighter drift
+   Drift now max 8px Y, 4px X, 1deg rotation.
    ───────────────────────────────────────────── */
 
 .float-chip {
@@ -137,8 +166,8 @@ h3 {
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow:
-    0 1px 2px rgba(10, 10, 10, 0.04),
-    0 4px 12px rgba(10, 10, 10, 0.06),
+    0 1px 2px rgba(20, 20, 20, 0.04),
+    0 4px 12px rgba(20, 20, 20, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
@@ -158,30 +187,30 @@ h3 {
 
 @keyframes float-drift-1 {
   0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  25%      { transform: translate(6px, -10px) rotate(0.8deg); }
-  50%      { transform: translate(-4px, -14px) rotate(-0.5deg); }
-  75%      { transform: translate(-8px, -6px) rotate(0.3deg); }
+  25%      { transform: translate(3px, -5px) rotate(0.5deg); }
+  50%      { transform: translate(-2px, -8px) rotate(-0.3deg); }
+  75%      { transform: translate(-4px, -3px) rotate(0.2deg); }
 }
 
 @keyframes float-drift-2 {
   0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  33%      { transform: translate(-7px, -12px) rotate(-1deg); }
-  66%      { transform: translate(5px, -8px) rotate(1deg); }
+  33%      { transform: translate(-3px, -7px) rotate(-0.6deg); }
+  66%      { transform: translate(2px, -4px) rotate(0.6deg); }
 }
 
 @keyframes float-drift-3 {
   0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  50%      { transform: translate(8px, -16px) rotate(0.6deg); }
+  50%      { transform: translate(4px, -8px) rotate(0.4deg); }
 }
 
 @keyframes float-drift-4 {
   0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  20%      { transform: translate(-5px, -8px) rotate(-0.7deg); }
-  60%      { transform: translate(7px, -12px) rotate(0.5deg); }
-  80%      { transform: translate(-3px, -6px) rotate(-0.3deg); }
+  20%      { transform: translate(-2px, -4px) rotate(-0.4deg); }
+  60%      { transform: translate(3px, -7px) rotate(0.3deg); }
+  80%      { transform: translate(-1px, -3px) rotate(-0.2deg); }
 }
 
-/* Status dot — subtle 3s pulse between 70% and 100% opacity */
+/* Status dot — subtle 3s pulse */
 .chip-dot {
   animation: chip-dot-pulse 3s ease-in-out infinite;
 }
@@ -212,11 +241,33 @@ h3 {
 }
 
 /* ─────────────────────────────────────────────
-   Bento cell — forest corner bracket (top-left)
+   Accent bar — forest vertical stripe before
+   transition lines ("This is the part that automates.").
+   ───────────────────────────────────────────── */
+
+.accent-bar {
+  position: relative;
+  padding-left: 20px;
+}
+
+.accent-bar::before {
+  content: "";
+  position: absolute;
+  top: 0.1em;
+  left: 0;
+  bottom: 0.1em;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--forest);
+}
+
+/* ─────────────────────────────────────────────
+   Bento cell — Mist-tinted gradient + corner bracket
    ───────────────────────────────────────────── */
 
 .bento-cell {
   position: relative;
+  background: linear-gradient(135deg, rgba(232, 242, 236, 0.4) 0%, #FFFFFF 60%);
 }
 
 .bento-cell::before {
@@ -230,7 +281,7 @@ h3 {
   border-left: 2px solid var(--forest);
   border-top-left-radius: 16px;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* ─────────────────────────────────────────────
@@ -253,7 +304,7 @@ h3 {
 }
 
 /* ─────────────────────────────────────────────
-   Bento — processing illustration (sequential rows)
+   Bento — processing illustration
    ───────────────────────────────────────────── */
 
 .proc-row {
@@ -290,7 +341,7 @@ h3 {
 }
 
 /* ─────────────────────────────────────────────
-   Bento — output illustration (rows populating)
+   Bento — output illustration
    ───────────────────────────────────────────── */
 
 .output-row {
@@ -339,16 +390,6 @@ h3 {
   100%      { color: var(--ink); }
 }
 
-.recon-line {
-  animation: recon-line 5s ease-in-out infinite;
-}
-
-@keyframes recon-line {
-  0%, 60%   { stroke: var(--border-medium); }
-  70%, 80%  { stroke: var(--forest-bright); }
-  100%      { stroke: var(--border-medium); }
-}
-
 /* ─────────────────────────────────────────────
    Fade-up reveal
    ───────────────────────────────────────────── */
@@ -386,8 +427,7 @@ h3 {
   .proc-check,
   .output-row,
   .output-chip,
-  .recon-glow,
-  .recon-line {
+  .recon-glow {
     opacity: 1 !important;
     transform: none !important;
   }
@@ -410,11 +450,11 @@ h3 {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(10, 10, 10, 0.15);
+  background: rgba(20, 20, 20, 0.15);
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(10, 10, 10, 0.25);
+  background: rgba(20, 20, 20, 0.25);
 }
 
 /* ─────────────────────────────────────────────

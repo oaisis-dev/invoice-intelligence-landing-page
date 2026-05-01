@@ -3,7 +3,7 @@ import { SectionContainer } from "./primitives";
 export function CustomerStory() {
   return (
     <section className="w-full bg-canvas">
-      <SectionContainer width="narrow" className="py-28 md:py-36">
+      <SectionContainer width="narrow" className="pt-32 pb-28 md:pt-40 md:pb-36">
         <div className="mx-auto max-w-[720px]">
           <span className="text-[12px] font-medium uppercase tracking-[0.08em] text-ink-muted">
             A recent engagement
@@ -39,7 +39,7 @@ export function CustomerStory() {
             </p>
           </div>
 
-          <p className="mt-8 text-[19px] font-medium leading-[1.5] text-ink">
+          <p className="accent-bar mt-8 text-[19px] font-medium leading-[1.5] text-ink">
             If your current tool can&rsquo;t read a handwritten delivery ticket
             or a PDF with a new vendor logo, you already know where your
             variance comes from.

@@ -1,3 +1,5 @@
+type Tier = "md" | "lg";
+
 type Chip = {
   label: string;
   className: string;
@@ -7,46 +9,36 @@ type Chip = {
   duration: string;
   /** Which of 4 drift keyframes to use. */
   variant: 1 | 2 | 3 | 4;
+  /**
+   * "md" = visible at 768+ (vendor chips, four-corner anchor).
+   * "lg" = visible at 1024+ only (line-item and GL chips — longer labels
+   * that would crowd the headline at narrower widths).
+   */
+  tier: Tier;
   hasDot?: boolean;
 };
 
 /**
- * 8 chips, scattered absolutely. Three on the left, three on the right,
- * two below the CTA row. Hidden on mobile (below md) where the hero is just
- * eyebrow + headline + CTAs + trust line.
- *
- * Positions are tuned so chips never overlap the centered max-w-[900px]
- * headline at common breakpoints (1024–1440). Each chip has a different
- * float delay so the bobbing is desynced.
+ * 8 chips total. At md (768–1023): only the 4 vendor-name chips show,
+ * pinned to the four corners of the hero so they never crowd the
+ * centered headline. At lg+ (1024+): the 4 line-item and GL chips
+ * appear in the side margins, filling out the scattered layout.
  */
 const chips: Chip[] = [
-  // Left column (top → bottom)
+  // Vendor names — always show at md+
   {
     label: "Sysco Foods",
     hasDot: true,
+    tier: "md",
     className: "top-[8%] left-[2%] xl:left-[4%]",
     variant: 1,
     duration: "11s",
     delay: "-2s",
   },
   {
-    label: "GL: 5010-PROTEIN",
-    className: "top-[34%] left-[0%] xl:left-[2%]",
-    variant: 2,
-    duration: "13s",
-    delay: "-7s",
-  },
-  {
-    label: "Atlantic Salmon · $612.00",
-    className: "top-[58%] left-[4%] xl:left-[6%]",
-    variant: 3,
-    duration: "9s",
-    delay: "-4s",
-  },
-  // Right column (top → bottom)
-  {
     label: "US Foods · INV-44218",
     hasDot: true,
+    tier: "md",
     className: "top-[10%] right-[2%] xl:right-[4%]",
     variant: 4,
     duration: "14s",
@@ -55,40 +47,62 @@ const chips: Chip[] = [
   {
     label: "Performance Food Group",
     hasDot: true,
-    className: "top-[36%] right-[0%] xl:right-[2%]",
+    tier: "md",
+    className: "top-[62%] right-[0%] xl:right-[2%]",
     variant: 1,
     duration: "10s",
     delay: "-1s",
   },
   {
-    label: "GL: 5020-PRODUCE",
-    className: "top-[60%] right-[5%] xl:right-[7%]",
-    variant: 2,
-    duration: "12s",
-    delay: "-6s",
-  },
-  // Below CTAs
-  {
-    label: "Beef Tenderloin · $890.00",
-    className: "bottom-[8%] left-[18%] xl:left-[22%]",
-    variant: 3,
-    duration: "8s",
-    delay: "-3s",
-  },
-  {
     label: "Ben E. Keith · INV-92301",
     hasDot: true,
+    tier: "md",
     className: "bottom-[10%] right-[16%] xl:right-[20%]",
     variant: 4,
     duration: "11s",
     delay: "-8s",
   },
+  // Line-item + GL — only at lg+
+  {
+    label: "GL: 5010-PROTEIN",
+    tier: "lg",
+    className: "top-[34%] left-[0%] xl:left-[2%]",
+    variant: 2,
+    duration: "13s",
+    delay: "-7s",
+  },
+  {
+    label: "Atlantic Salmon · $612.00",
+    tier: "lg",
+    className: "top-[60%] left-[4%] xl:left-[6%]",
+    variant: 3,
+    duration: "9s",
+    delay: "-4s",
+  },
+  {
+    label: "GL: 5020-PRODUCE",
+    tier: "lg",
+    className: "top-[36%] right-[0%] xl:right-[2%]",
+    variant: 2,
+    duration: "12s",
+    delay: "-6s",
+  },
+  {
+    label: "Beef Tenderloin · $890.00",
+    tier: "lg",
+    className: "bottom-[8%] left-[18%] xl:left-[22%]",
+    variant: 3,
+    duration: "8s",
+    delay: "-3s",
+  },
 ];
 
-function Chip({ label, className, delay, duration, variant, hasDot }: Chip) {
+function Chip({ label, className, delay, duration, variant, tier, hasDot }: Chip) {
+  const visibility =
+    tier === "md" ? "hidden md:inline-flex" : "hidden lg:inline-flex";
   return (
     <div
-      className={`float-chip float-chip-${variant} absolute hidden md:inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[12px] font-medium text-ink-secondary ${className}`}
+      className={`float-chip float-chip-${variant} absolute ${visibility} items-center gap-2 rounded-full px-3 py-1.5 text-[12px] font-medium text-ink-secondary ${className}`}
       style={{
         animationDuration: duration,
         animationDelay: delay,
@@ -158,7 +172,7 @@ export function Hero() {
             </a>
             <a
               href="#pricing"
-              className="inline-flex items-center rounded-[10px] border border-border-medium bg-white px-7 py-3 text-[15px] font-medium text-ink transition-colors hover:bg-surface-warm"
+              className="inline-flex items-center rounded-[10px] border border-border-medium bg-white px-7 py-3 text-[15px] font-medium text-ink transition-colors hover:bg-mist"
             >
               See pricing
             </a>

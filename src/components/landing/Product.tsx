@@ -13,21 +13,21 @@ function BentoCell({
   illustration: ReactNode;
 }) {
   return (
-    <div className="bento-cell relative overflow-hidden rounded-[16px] border border-border-subtle bg-white p-10 md:aspect-[4/3]">
-      {/* Text block, top-left */}
-      <div className="relative z-10 max-w-[380px]">
+    <div className="bento-cell flex flex-col overflow-hidden rounded-[16px] border border-border-subtle">
+      {/* Top region — text. Flow only, no absolute children. */}
+      <div className="px-8 pt-10 pb-6 md:px-10 md:pt-12 md:pb-8">
         <span className="text-[12px] font-medium uppercase tracking-[0.08em] text-ink-muted">
           {eyebrow}
         </span>
         <h3 className="mt-3 text-ink">{heading}</h3>
-        <p className="mt-3 text-[15px] leading-[1.55] text-ink-secondary">
+        <p className="mt-3 max-w-[380px] text-[15px] leading-[1.55] text-ink-secondary">
           {body}
         </p>
       </div>
 
-      {/* Illustration, anchored bottom-right */}
+      {/* Bottom region — bounded illustration. Nothing escapes. */}
       <div
-        className="pointer-events-none absolute inset-0 z-0"
+        className="relative mt-auto h-[200px] overflow-hidden md:h-[240px]"
         aria-hidden
       >
         {illustration}
@@ -55,7 +55,7 @@ function InvoiceDoc({
 }) {
   return (
     <div
-      className={`intake-doc absolute h-14 w-11 rounded-[3px] border border-border-medium bg-white ${delayClass} ${className}`}
+      className={`intake-doc absolute h-14 w-11 overflow-hidden rounded-[3px] border border-border-medium bg-white ${delayClass} ${className}`}
       style={
         {
           boxShadow: "var(--shadow-chip)",
@@ -65,19 +65,19 @@ function InvoiceDoc({
         } as React.CSSProperties
       }
     >
+      <div className="h-1.5 w-full bg-forest" />
       <div className="mt-2 ml-2 h-[2px] w-5 rounded-full bg-border-medium" />
       <div className="mt-1.5 ml-2 h-[2px] w-6 rounded-full bg-border-subtle" />
       <div className="mt-1.5 ml-2 h-[2px] w-4 rounded-full bg-border-subtle" />
-      <div className="mt-1.5 ml-2 h-[2px] w-5 rounded-full bg-border-subtle" />
     </div>
   );
 }
 
 function IntakeIllustration() {
   return (
-    <div className="absolute right-6 bottom-6 h-[180px] w-[200px] md:right-10 md:bottom-10 md:h-[220px] md:w-[240px]">
+    <div className="absolute inset-0">
       {/* Inbox */}
-      <div className="absolute right-2 bottom-2 h-[80px] w-[160px] rounded-[6px] border-2 border-forest bg-white">
+      <div className="absolute right-10 bottom-8 h-[80px] w-[160px] rounded-[6px] border-2 border-forest bg-white">
         <div className="absolute -top-1 left-4 right-4 h-[3px] rounded-full bg-forest" />
         <div className="absolute top-3 left-4 right-4 h-[2px] rounded-full bg-border-medium" />
         <div className="absolute top-7 left-4 right-12 h-[2px] rounded-full bg-border-subtle" />
@@ -85,21 +85,21 @@ function IntakeIllustration() {
 
       {/* Invoices flying in */}
       <InvoiceDoc
-        className="right-[18px] bottom-[60px]"
+        className="right-[28px] bottom-[70px]"
         delayClass=""
         fromX={-50}
         fromY={-40}
         fromR={-12}
       />
       <InvoiceDoc
-        className="right-[58px] bottom-[60px] intake-doc-2"
+        className="right-[68px] bottom-[70px] intake-doc-2"
         delayClass=""
         fromX={20}
         fromY={-50}
         fromR={6}
       />
       <InvoiceDoc
-        className="right-[100px] bottom-[60px] intake-doc-3"
+        className="right-[110px] bottom-[70px] intake-doc-3"
         delayClass=""
         fromX={-30}
         fromY={-60}
@@ -116,9 +116,17 @@ function IntakeIllustration() {
 function CheckIcon({ delayClass }: { delayClass: string }) {
   return (
     <span
-      className={`proc-check inline-flex size-4 items-center justify-center rounded-full bg-forest text-white ${delayClass}`}
+      className={`proc-check inline-flex size-5 items-center justify-center rounded-full bg-forest text-white ${delayClass}`}
     >
-      <svg viewBox="0 0 16 16" className="size-2.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        viewBox="0 0 16 16"
+        className="size-3"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <polyline points="3 8 7 12 13 4" />
       </svg>
     </span>
@@ -134,57 +142,68 @@ function ProcessingIllustration() {
   ];
 
   return (
-    <div className="absolute right-6 bottom-6 w-[260px] rounded-[8px] border border-border-subtle bg-white p-4 md:right-10 md:bottom-10 md:w-[300px]">
-      <div className="space-y-2.5 font-mono text-[12px]">
-        {rows.map((r, i) => (
-          <div
-            key={r.field}
-            className={`proc-row flex items-center justify-between gap-3 proc-row-${i + 1}`}
-          >
-            <div className="flex items-center gap-2 truncate">
-              <span className="text-ink-muted">{r.field}:</span>
-              <span className="truncate text-ink">{r.value}</span>
+    <div className="absolute right-8 bottom-6 left-8 md:right-10 md:left-auto md:w-[300px]">
+      <div className="rounded-[8px] border border-border-subtle bg-white p-4">
+        <div className="space-y-2.5 font-mono text-[12px]">
+          {rows.map((r, i) => (
+            <div
+              key={r.field}
+              className={`proc-row flex items-center justify-between gap-3 proc-row-${i + 1}`}
+            >
+              <div className="flex items-center gap-2 truncate">
+                <span className="text-ink-muted">{r.field}:</span>
+                <span className="truncate text-ink">{r.value}</span>
+              </div>
+              <CheckIcon delayClass={`proc-check-${i + 1}`} />
             </div>
-            <CheckIcon delayClass={`proc-check-${i + 1}`} />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
 /* ─────────────────────────────────────────────
-   OUTPUT — spreadsheet grid + format chips
+   OUTPUT — spreadsheet grid + format chips + Posted column
    ───────────────────────────────────────────── */
 
 function OutputIllustration() {
   const formats = ["R365", "InfoSync", "NetSuite", "QuickBooks", "CSV"];
+  const headers = ["Vendor", "Date", "Amt", "GL", "Status"];
+  const rows = [
+    { vendor: "Sysco", date: "04-12", amt: "$2,847", gl: "5010" },
+    { vendor: "US Foods", date: "04-12", amt: "$1,209", gl: "5010" },
+    { vendor: "Ben E. Keith", date: "04-12", amt: "$642", gl: "5020" },
+  ];
+
   return (
-    <div className="absolute right-6 bottom-6 w-[280px] md:right-10 md:bottom-10 md:w-[320px]">
-      {/* Mini spreadsheet */}
+    <div className="absolute right-8 bottom-6 left-8 md:right-10 md:left-auto md:w-[320px]">
       <div className="rounded-[8px] border border-border-subtle bg-white">
         <div className="grid grid-cols-5 border-b border-border-subtle text-[10px] font-medium text-ink-muted">
-          {["Vendor", "Date", "Amt", "GL", "Loc"].map((h) => (
+          {headers.map((h) => (
             <div key={h} className="px-2 py-1.5 text-left">
               {h}
             </div>
           ))}
         </div>
-        {[1, 2, 3].map((i) => (
+        {rows.map((r, i) => (
           <div
             key={i}
-            className={`output-row grid grid-cols-5 border-b border-border-subtle/50 text-[10px] text-ink-secondary last:border-b-0 output-row-${i}`}
+            className={`output-row grid grid-cols-5 border-b border-border-subtle text-[10px] text-ink-secondary last:border-b-0 output-row-${i + 1}`}
           >
-            <div className="px-2 py-1.5 truncate">Sysco</div>
-            <div className="px-2 py-1.5 truncate">04-12</div>
-            <div className="px-2 py-1.5 truncate">$2,847</div>
-            <div className="px-2 py-1.5 truncate">5010</div>
-            <div className="px-2 py-1.5 truncate">SF-03</div>
+            <div className="px-2 py-1.5 truncate">{r.vendor}</div>
+            <div className="px-2 py-1.5 truncate">{r.date}</div>
+            <div className="px-2 py-1.5 truncate">{r.amt}</div>
+            <div className="px-2 py-1.5 truncate">{r.gl}</div>
+            <div className="px-1 py-1">
+              <span className="inline-flex items-center rounded-[3px] bg-mist px-1.5 py-0.5 text-[9px] font-medium text-forest-bright">
+                Posted
+              </span>
+            </div>
           </div>
         ))}
       </div>
 
-      {/* Format chips */}
       <div className="mt-3 flex flex-wrap gap-1.5">
         {formats.map((f, i) => (
           <span
@@ -200,13 +219,13 @@ function OutputIllustration() {
 }
 
 /* ─────────────────────────────────────────────
-   RECONCILIATION — two columns aligning
+   RECONCILIATION — two columns aligning, solid forest line
    ───────────────────────────────────────────── */
 
 function ReconciliationIllustration() {
   return (
-    <div className="absolute right-6 bottom-6 w-[280px] md:right-10 md:bottom-10 md:w-[320px]">
-      <div className="flex items-center justify-between gap-4">
+    <div className="absolute right-8 bottom-6 left-8 md:right-10 md:left-auto md:w-[320px]">
+      <div className="flex items-center justify-between gap-3">
         {/* Books column */}
         <div className="flex-1 rounded-[8px] border border-border-subtle bg-white p-3">
           <div className="text-[10px] font-medium uppercase tracking-[0.06em] text-ink-muted">
@@ -222,7 +241,7 @@ function ReconciliationIllustration() {
           </div>
         </div>
 
-        {/* Connecting line */}
+        {/* Connecting line — solid forest */}
         <svg
           width="32"
           height="40"
@@ -232,7 +251,7 @@ function ReconciliationIllustration() {
         >
           <path
             d="M2 20 L30 20"
-            className="recon-line"
+            stroke="var(--forest)"
             strokeWidth="2"
             strokeLinecap="round"
           />
@@ -260,8 +279,8 @@ function ReconciliationIllustration() {
 
 export function Product() {
   return (
-    <section className="w-full bg-canvas">
-      <SectionContainer width="xl" className="py-32">
+    <section className="section-wash w-full bg-canvas">
+      <SectionContainer width="xl" className="pt-32 pb-32 md:pt-40">
         <h2 className="accent-underline mx-auto max-w-[900px] text-center text-ink">
           Everything your AP team has been waiting for.
         </h2>

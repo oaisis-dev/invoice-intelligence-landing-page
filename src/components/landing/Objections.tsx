@@ -29,8 +29,8 @@ const items = [
 
 export function Objections() {
   return (
-    <section id="pricing" className="w-full bg-surface-warm">
-      <SectionContainer width="xl" className="py-28 md:py-36">
+    <section id="pricing" className="section-wash w-full bg-canvas">
+      <SectionContainer width="xl" className="pt-32 pb-28 md:pt-40 md:pb-36">
         <h2 className="accent-underline mx-auto max-w-[800px] text-center text-ink">
           Yes, we thought of that.
         </h2>

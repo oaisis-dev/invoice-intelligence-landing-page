@@ -6,9 +6,10 @@ export function Nav() {
       <nav className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4 md:px-10">
         <Link
           href="/"
-          className="text-[18px] font-medium text-forest"
+          className="text-[18px] text-forest tracking-tight"
         >
-          Invoice Intelligence
+          <span className="font-bold">Invoice</span>{" "}
+          <span className="font-light opacity-65">Intelligence</span>
         </Link>
 
         <div className="flex items-center gap-6">

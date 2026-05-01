@@ -49,13 +49,14 @@ function FooterColumn({ heading, links }: { heading: string; links: Link[] }) {
 
 export function Footer() {
   return (
-    <footer className="w-full border-t border-border-subtle bg-surface-warm">
+    <footer className="w-full border-t border-border-subtle bg-canvas">
       <SectionContainer width="xl" className="py-16">
         <div className="mx-auto grid max-w-[1200px] gap-10 md:grid-cols-5">
           {/* Brand */}
           <div>
-            <span className="text-[16px] font-medium text-forest">
-              Invoice Intelligence
+            <span className="text-[16px] text-forest tracking-tight">
+              <span className="font-bold">Invoice</span>{" "}
+              <span className="font-light opacity-65">Intelligence</span>
             </span>
             <p className="mt-3 text-[14px] text-ink-muted">
               An OAISIS product

@@ -2,8 +2,8 @@ import { SectionContainer } from "./primitives";
 
 export function Problem() {
   return (
-    <section className="w-full bg-surface-warm">
-      <SectionContainer width="narrow" className="py-28 md:py-36">
+    <section className="section-wash w-full bg-canvas">
+      <SectionContainer width="narrow" className="pt-32 pb-28 md:pt-40 md:pb-36">
         <div className="mx-auto max-w-[720px]">
           <h2 className="accent-underline text-ink">
             You didn&rsquo;t hire a controller to do data entry.
@@ -25,7 +25,7 @@ export function Problem() {
             </p>
           </div>
 
-          <p className="mt-8 text-[19px] font-medium leading-[1.5] text-ink">
+          <p className="accent-bar mt-8 text-[19px] font-medium leading-[1.5] text-ink">
             This is the part that automates.
           </p>
         </div>

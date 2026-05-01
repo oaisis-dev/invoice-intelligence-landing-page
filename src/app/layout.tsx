@@ -1,23 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 
 /**
- * Display sans — Inter at heavier weights stands in for Inter Display.
- * Inter Display is the same family with optical sizing optimized for
- * large display sizes; Google Fonts ships it as Inter, and at the weights
- * we use (600–800) the visual difference is negligible.
+ * Outfit — primary typeface per Invoice Intelligence brand guide.
+ * Geometric humanist sans, similar weight footprint to Inter but with
+ * rounder, more confident letterforms.
  */
-const interDisplay = Inter({
+const outfit = Outfit({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   variable: "--font-display",
   display: "swap",
 });
 
-const interBody = Inter({
+const outfitBody = Outfit({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["300", "400", "500", "600"],
   variable: "--font-body",
   display: "swap",
 });
@@ -36,7 +35,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${interDisplay.variable} ${interBody.variable} h-full antialiased`}
+      className={`${outfit.variable} ${outfitBody.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-canvas text-ink font-sans">
         {children}
