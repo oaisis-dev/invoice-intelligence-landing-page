@@ -1,21 +1,25 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────────
-   Design tokens — Invoice Intelligence v2
-   Warm, restrained, operator-grade.
+   Design tokens — Invoice Intelligence v3
+   Whitespace, dawn light, near-black ink.
+   Aesthetic anchor: Gumloop.
    ───────────────────────────────────────────── */
 :root {
-  --canvas: #F7F5F0;
+  --canvas: #FAFAF8;
   --surface: #FFFFFF;
-  --surface-warm: #F0EDE5;
+  --surface-warm: #F5F4F1;
   --ink: #0A0A0A;
-  --ink-secondary: #3D3D3D;
+  --ink-secondary: #404040;
   --ink-muted: #737373;
+  --ink-strikethrough: #A8A8A8;
   --forest: #27653D;
   --forest-hover: #1F5230;
-  --border-subtle: rgba(10, 10, 10, 0.08);
-  --border-medium: rgba(10, 10, 10, 0.14);
+  --forest-bright: #2F7D49;
+  --border-subtle: rgba(10, 10, 10, 0.06);
+  --border-medium: rgba(10, 10, 10, 0.12);
   --shadow-soft: 0 1px 2px rgba(10, 10, 10, 0.04), 0 8px 24px rgba(10, 10, 10, 0.06);
+  --shadow-chip: 0 1px 3px rgba(10, 10, 10, 0.04);
 }
 
 @theme inline {
@@ -25,15 +29,17 @@
   --color-ink: var(--ink);
   --color-ink-secondary: var(--ink-secondary);
   --color-ink-muted: var(--ink-muted);
+  --color-ink-strikethrough: var(--ink-strikethrough);
   --color-forest: var(--forest);
   --color-forest-hover: var(--forest-hover);
+  --color-forest-bright: var(--forest-bright);
   --color-border-subtle: var(--border-subtle);
   --color-border-medium: var(--border-medium);
 
   --font-sans: var(--font-body), ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", Roboto, "Inter", "Helvetica Neue", Arial, sans-serif;
-  --font-display: var(--font-display), "Instrument Serif", "PP Editorial Old",
-    "Times New Roman", ui-serif, Georgia, serif;
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-display), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
     "Liberation Mono", monospace;
 }
@@ -50,31 +56,202 @@ body {
 
 body {
   overflow-x: hidden;
+  font-size: 17px;
+  line-height: 1.55;
+  font-weight: 400;
 }
 
 /* ─────────────────────────────────────────────
-   Typography
+   Typography — display sizing
    ───────────────────────────────────────────── */
 
 h1 {
-  font-size: clamp(3rem, 6vw, 5.5rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(3.5rem, 7.5vw, 6.5rem);
+  line-height: 1.0;
+  letter-spacing: -0.04em;
 }
 
 h2 {
-  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 5vw, 4rem);
   line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
 /* ─────────────────────────────────────────────
-   Hero dotted grid
+   Dawn gradient — soft early-morning wash
    ───────────────────────────────────────────── */
 
-.bg-dot-grid {
-  background-image: radial-gradient(circle, rgba(10, 10, 10, 0.04) 1px, transparent 1px);
-  background-size: 24px 24px;
+.bg-dawn {
+  background:
+    radial-gradient(ellipse 1200px 600px at 20% 0%, rgba(186, 209, 230, 0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 1000px 500px at 80% 10%, rgba(245, 219, 230, 0.28) 0%, transparent 55%),
+    radial-gradient(ellipse 800px 400px at 50% 100%, rgba(255, 235, 210, 0.20) 0%, transparent 50%),
+    var(--canvas);
+}
+
+.bg-dawn-faint {
+  background:
+    radial-gradient(ellipse 1100px 500px at 30% 0%, rgba(186, 209, 230, 0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 900px 450px at 75% 100%, rgba(245, 219, 230, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 700px 350px at 50% 50%, rgba(255, 235, 210, 0.14) 0%, transparent 55%),
+    var(--canvas);
+}
+
+/* ─────────────────────────────────────────────
+   Strikethrough word in hero headline
+   The line should feel like an editing mark, not a typo.
+   ───────────────────────────────────────────── */
+
+.strike-word {
+  position: relative;
+  color: var(--ink-strikethrough);
+  text-decoration: line-through;
+  text-decoration-thickness: 0.06em;
+  text-decoration-color: var(--ink-strikethrough);
+  text-underline-offset: 0;
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────────────
+   Floating hero chip — subtle bob animation
+   ───────────────────────────────────────────── */
+
+.float-chip {
+  animation: float-bob 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes float-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* ─────────────────────────────────────────────
+   Bento — intake illustration (gliding invoices)
+   ───────────────────────────────────────────── */
+
+.intake-doc {
+  animation: intake-glide 3s ease-in-out infinite;
+  transform-origin: center;
+}
+.intake-doc-2 { animation-delay: 1s; }
+.intake-doc-3 { animation-delay: 2s; }
+
+@keyframes intake-glide {
+  0%   { opacity: 0; transform: translate(var(--from-x, -40px), var(--from-y, -30px)) rotate(var(--from-r, -8deg)); }
+  35%  { opacity: 1; }
+  70%  { opacity: 1; transform: translate(0, 0) rotate(0); }
+  85%  { opacity: 0.6; transform: translate(0, 4px) rotate(0); }
+  100% { opacity: 0; transform: translate(0, 12px) rotate(0); }
+}
+
+/* ─────────────────────────────────────────────
+   Bento — processing illustration (sequential rows)
+   ───────────────────────────────────────────── */
+
+.proc-row {
+  opacity: 0;
+  animation: proc-appear 5s ease-out infinite;
+}
+.proc-row-1 { animation-delay: 0s; }
+.proc-row-2 { animation-delay: 0.6s; }
+.proc-row-3 { animation-delay: 1.2s; }
+.proc-row-4 { animation-delay: 1.8s; }
+
+@keyframes proc-appear {
+  0%   { opacity: 0; transform: translateY(4px); }
+  10%  { opacity: 1; transform: translateY(0); }
+  60%  { opacity: 1; }
+  85%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.proc-check {
+  opacity: 0;
+  animation: proc-check 5s ease-out infinite;
+}
+.proc-check-1 { animation-delay: 0.3s; }
+.proc-check-2 { animation-delay: 0.9s; }
+.proc-check-3 { animation-delay: 1.5s; }
+.proc-check-4 { animation-delay: 2.1s; }
+
+@keyframes proc-check {
+  0%, 5%   { opacity: 0; transform: scale(0.6); }
+  15%      { opacity: 1; transform: scale(1.1); }
+  20%, 60% { opacity: 1; transform: scale(1); }
+  85%, 100% { opacity: 0; }
+}
+
+/* ─────────────────────────────────────────────
+   Bento — output illustration (rows populating)
+   ───────────────────────────────────────────── */
+
+.output-row {
+  opacity: 0;
+  animation: output-fill 5s ease-out infinite;
+}
+.output-row-1 { animation-delay: 0s; }
+.output-row-2 { animation-delay: 0.5s; }
+.output-row-3 { animation-delay: 1s; }
+
+.output-chip {
+  opacity: 0;
+  animation: output-chip-in 5s ease-out infinite;
+}
+.output-chip-1 { animation-delay: 1.6s; }
+.output-chip-2 { animation-delay: 1.8s; }
+.output-chip-3 { animation-delay: 2.0s; }
+.output-chip-4 { animation-delay: 2.2s; }
+.output-chip-5 { animation-delay: 2.4s; }
+
+@keyframes output-fill {
+  0%      { opacity: 0; transform: translateX(-6px); }
+  10%     { opacity: 1; transform: translateX(0); }
+  85%     { opacity: 1; }
+  100%    { opacity: 0; }
+}
+
+@keyframes output-chip-in {
+  0%, 30%  { opacity: 0; transform: translateY(4px); }
+  40%      { opacity: 1; transform: translateY(0); }
+  85%      { opacity: 1; }
+  100%     { opacity: 0; }
+}
+
+/* ─────────────────────────────────────────────
+   Bento — reconciliation illustration
+   ───────────────────────────────────────────── */
+
+.recon-glow {
+  animation: recon-glow 5s ease-in-out infinite;
+}
+
+@keyframes recon-glow {
+  0%, 60%   { color: var(--ink); }
+  70%, 80%  { color: var(--forest-bright); }
+  100%      { color: var(--ink); }
+}
+
+.recon-line {
+  animation: recon-line 5s ease-in-out infinite;
+}
+
+@keyframes recon-line {
+  0%, 60%   { stroke: var(--border-medium); }
+  70%, 80%  { stroke: var(--forest-bright); }
+  100%      { stroke: var(--border-medium); }
 }
 
 /* ─────────────────────────────────────────────
@@ -91,6 +268,37 @@ h2 {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Reduced motion — freeze everything at final state
+   ───────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .float-chip,
+  .intake-doc,
+  .proc-row,
+  .proc-check,
+  .output-row,
+  .output-chip,
+  .recon-glow,
+  .recon-line {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
   }
 }
 
