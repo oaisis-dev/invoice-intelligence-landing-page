@@ -329,8 +329,9 @@ h3 {
   transform: translateX(-50%);
   z-index: 100;
   align-items: center;
-  gap: 8px;
-  padding: 8px 8px 8px 20px;
+  gap: 10px;
+  padding: 6px 6px 6px 16px;
+  white-space: nowrap;
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px) saturate(1.4);
   -webkit-backdrop-filter: blur(20px) saturate(1.4);
@@ -393,11 +394,12 @@ h3 {
 .floating-nav-link {
   display: inline-flex;
   align-items: center;
-  padding: 8px 14px;
+  padding: 7px 12px;
   border-radius: 999px;
   color: var(--ink);
   font-size: 14px;
   font-weight: 500;
+  white-space: nowrap;
   text-decoration: none;
   transition:
     background 0.3s var(--ease-smooth),
@@ -412,12 +414,13 @@ h3 {
 .floating-nav-cta {
   display: inline-flex;
   align-items: center;
-  padding: 10px 18px;
+  padding: 8px 16px;
   border-radius: 999px;
   background: var(--ink);
   color: white;
   font-size: 14px;
   font-weight: 500;
+  white-space: nowrap;
   text-decoration: none;
   transition:
     background 0.3s var(--ease-smooth),
