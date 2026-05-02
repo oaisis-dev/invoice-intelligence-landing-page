@@ -1,11 +1,12 @@
+import NextLink from "next/link";
 import { SectionContainer } from "./primitives";
 
-type Link = { label: string; href: string; external?: boolean };
+type Link = { label: string; href: string; external?: boolean; internal?: boolean };
 
 const productLinks: Link[] = [
-  { label: "Pricing", href: "#pricing" },
-  { label: "Book a demo", href: "mailto:chris@useoptimalai.com?subject=Demo request" },
-  { label: "Sign in", href: "mailto:chris@useoptimalai.com" },
+  { label: "Pricing", href: "/pricing", internal: true },
+  { label: "Get started", href: "https://invoice-stg.openoaisis.com/sign-up" },
+  { label: "Sign in", href: "https://invoice-stg.openoaisis.com/sign-in" },
 ];
 
 const resourceLinks: Link[] = [
@@ -31,15 +32,24 @@ function FooterColumn({ heading, links }: { heading: string; links: Link[] }) {
       <ul className="space-y-2.5">
         {links.map((l) => (
           <li key={l.label}>
-            <a
-              href={l.href}
-              {...(l.external
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
-              className="text-[14px] text-ink-secondary transition-colors hover:text-ink"
-            >
-              {l.label}
-            </a>
+            {l.internal ? (
+              <NextLink
+                href={l.href}
+                className="text-[14px] text-ink-secondary transition-colors hover:text-ink"
+              >
+                {l.label}
+              </NextLink>
+            ) : (
+              <a
+                href={l.href}
+                {...(l.external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+                className="text-[14px] text-ink-secondary transition-colors hover:text-ink"
+              >
+                {l.label}
+              </a>
+            )}
           </li>
         ))}
       </ul>

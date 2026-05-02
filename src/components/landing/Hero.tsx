@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 type Tier = "md" | "lg";
@@ -221,17 +222,17 @@ export function Hero() {
             style={{ animationDelay: "0.4s" }}
           >
             <a
-              href="mailto:chris@useoptimalai.com?subject=Demo request"
+              href="https://invoice-stg.openoaisis.com/sign-up"
               className="cta-primary inline-flex items-center rounded-[10px] bg-ink px-7 py-3 text-[15px] font-medium text-white"
             >
-              Book a 15-minute demo
+              Get started — free
             </a>
-            <a
-              href="#pricing"
+            <Link
+              href="/pricing"
               className="inline-flex items-center rounded-[10px] border border-border-medium bg-white px-7 py-3 text-[15px] font-medium text-ink transition-colors hover:bg-mist"
             >
               See pricing
-            </a>
+            </Link>
           </div>
 
           {/* Trust line */}
@@ -239,8 +240,8 @@ export function Hero() {
             className="reveal mt-6 text-[13px] text-ink-muted"
             style={{ animationDelay: "0.55s" }}
           >
-            Built for 5–50 location restaurant groups · Works with R365,
-            InfoSync, custom GL
+            Free for 10 invoices a month · Pro at $100 per location · No credit
+            card required
           </p>
         </div>
       </div>

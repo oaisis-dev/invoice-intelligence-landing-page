@@ -7,28 +7,38 @@ export function FinalCTA() {
         <div className="mx-auto max-w-[700px] text-center">
           <ScrollReveal>
             <h2 className="accent-underline text-ink">
-              See it on your invoices.
+              Run it on your invoices.
             </h2>
           </ScrollReveal>
 
           <ScrollReveal delay={150}>
             <p className="mx-auto mt-6 max-w-[540px] text-[19px] leading-[1.5] text-ink-secondary">
-              15 minutes. We process 10 of your real invoices live on the call.
-              You decide if it&rsquo;s worth a pilot.
+              Free for 10 invoices a month. Sign up, forward your first invoice,
+              and see your books update. No credit card.
             </p>
           </ScrollReveal>
 
           <ScrollReveal delay={300} className="mt-10">
             <a
-              href="mailto:chris@useoptimalai.com?subject=Demo request"
+              href="https://invoice-stg.openoaisis.com/sign-up"
               className="cta-primary inline-flex items-center rounded-[10px] bg-ink px-7 py-3 text-[15px] font-medium text-white"
             >
-              Book a demo
+              Get started — free
             </a>
           </ScrollReveal>
 
+          <p className="mt-4 text-[14px] text-ink-muted">
+            Or{" "}
+            <a
+              href="https://invoice-stg.openoaisis.com/sign-up?plan=pro"
+              className="underline transition-colors hover:text-ink-secondary"
+            >
+              upgrade straight to Pro — $100/location
+            </a>
+          </p>
+
           <p className="mt-6 text-[15px] text-ink-muted">
-            Or email{" "}
+            Questions? Email{" "}
             <a
               href="mailto:chris@useoptimalai.com"
               className="underline transition-colors hover:text-ink-secondary"

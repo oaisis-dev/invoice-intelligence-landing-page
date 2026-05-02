@@ -288,7 +288,7 @@ function ReconciliationIllustration() {
 
 export function Product() {
   return (
-    <section className="w-full bg-transparent">
+    <section id="product" className="w-full bg-transparent scroll-mt-24">
       <SectionContainer width="xl" className="pt-32 pb-32 md:pt-40">
         <ScrollReveal>
           <h2 className="accent-underline mx-auto max-w-[900px] text-center text-ink">
@@ -301,7 +301,7 @@ export function Product() {
             delay={0}
             eyebrow="INTAKE"
             heading="One inbox. Every invoice."
-            body="Connect Gmail or Outlook once. Every invoice that arrives — PDF, scan, email body, EDI — gets pulled in, parsed, and queued. No forwarding. No uploads."
+            body="Connect Gmail or Outlook once — or upload manually on the Free plan. Every invoice that arrives is pulled in, parsed, and queued. PDF, scan, email body, EDI. No forwarding. No clerk in the middle."
             illustration={<IntakeIllustration />}
           />
           <BentoCell
