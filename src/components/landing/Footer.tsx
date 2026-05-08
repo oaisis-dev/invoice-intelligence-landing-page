@@ -12,12 +12,11 @@ const productLinks: Link[] = [
 const resourceLinks: Link[] = [
   { label: "Built for restaurants", href: "#" },
   { label: "R365 vs Invoice Intelligence", href: "#" },
-  { label: "InfoSync vs Invoice Intelligence", href: "#" },
 ];
 
 const companyLinks: Link[] = [
   { label: "OAISIS", href: "https://useoptimalai.com", external: true },
-  { label: "Contact", href: "mailto:chris@useoptimalai.com" },
+  { label: "Contact", href: "mailto:hello@openoaisis.com" },
 ];
 
 const legalLinks: Link[] = [

@@ -149,7 +149,7 @@ export function PricingTable() {
               features={[
                 "Unlimited invoices",
                 "Email and PDF intake",
-                "All export formats (R365, InfoSync, NetSuite, QuickBooks, CSV)",
+                "All export formats (R365, DL, NetSuite, QuickBooks, CSV)",
                 "Unlimited locations",
                 "Vendor rule customization",
                 "Priority support",
@@ -165,10 +165,10 @@ export function PricingTable() {
         <p className="mx-auto mt-10 max-w-[700px] text-center text-[15px] text-ink-muted">
           Need a custom plan for 50+ locations?{" "}
           <a
-            href="mailto:chris@useoptimalai.com"
+            href="mailto:hello@openoaisis.com"
             className="underline transition-colors hover:text-ink"
           >
-            chris@useoptimalai.com
+            hello@openoaisis.com
           </a>
         </p>
       </SectionContainer>

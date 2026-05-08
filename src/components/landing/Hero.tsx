@@ -212,8 +212,9 @@ export function Hero() {
             className="reveal mt-8 max-w-[580px] text-[19px] leading-[1.5] text-ink-secondary"
             style={{ animationDelay: "0.25s" }}
           >
-            Restaurant365 and InfoSync break on real invoices. We don&rsquo;t.
-            Read every invoice. Code every line item. Export clean to your GL.
+            Restaurant365 and DL break on real invoices. We read what they
+            can&rsquo;t — handwritten tickets, mid-page format changes,
+            regional supplier scans — and post clean lines to your GL.
           </p>
 
           {/* CTAs */}
