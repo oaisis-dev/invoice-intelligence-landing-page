@@ -28,23 +28,26 @@ export function CustomerStory() {
             </ScrollReveal>
             <ScrollReveal delay={300}>
               <p>
-                The reason was structural. Restaurant365 and InfoSync — the
-                incumbents — rely on data dictionaries. Rigid pre-mapped
-                templates that work when invoices match the expected format
-                and break when they don&rsquo;t. Real restaurant invoices
-                don&rsquo;t match. Vendors change layouts. Line items shift.
-                Formats vary across suppliers. Every miss becomes a manual
-                reconciliation.
+                The reason was structural. Restaurant365 and DL — the
+                platforms most multi-unit operators use — rely on data
+                dictionaries. Rigid pre-mapped templates per vendor that
+                work when invoices match the expected format and break
+                when they don&rsquo;t. Real restaurant invoices
+                don&rsquo;t match. Vendors change layouts. Line items
+                shift. Formats vary across suppliers. Every miss becomes
+                a manual reconciliation.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={400}>
               <p>
-                We replaced the dictionary with OCR plus a classification model
-                that learns the chart of accounts and adapts to invoice
-                variation. Near-perfect capture, including the formats R365
-                and InfoSync can&rsquo;t read. The variance dropped by half in
-                the first months and is still falling. Month-end stopped being
-                a fire drill.
+                We replaced the dictionary with OCR plus a classification
+                model that learns the chart of accounts and adapts to
+                invoice variation. We capture the formats R365 and DL
+                can&rsquo;t read — handwritten delivery tickets, mid-page
+                vendor format changes, scanned faxes from regional
+                suppliers. The variance dropped by half in the first
+                months and is still falling. Month-end stopped being a
+                fire drill.
               </p>
             </ScrollReveal>
           </div>

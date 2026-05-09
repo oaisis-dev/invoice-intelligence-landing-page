@@ -174,7 +174,7 @@ function ProcessingIllustration() {
    ───────────────────────────────────────────── */
 
 function OutputIllustration() {
-  const formats = ["R365", "InfoSync", "NetSuite", "QuickBooks", "CSV"];
+  const formats = ["R365", "DL", "NetSuite", "QuickBooks", "CSV"];
   const headers = ["Vendor", "Date", "Amt", "GL", "Status"];
   const rows = [
     { vendor: "Sysco", date: "04-12", amt: "$2,847", gl: "5010" },
@@ -315,7 +315,7 @@ export function Product() {
             delay={200}
             eyebrow="OUTPUT"
             heading="Clean export. Every system."
-            body="R365, InfoSync, NetSuite, QuickBooks, custom CSV. Upload your chart of accounts once. Every processed invoice exports in your exact format."
+            body="R365, DL, NetSuite, QuickBooks, custom CSV. Upload your chart of accounts once. Every processed invoice exports in your exact format."
             illustration={<OutputIllustration />}
           />
           <BentoCell

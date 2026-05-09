@@ -40,10 +40,10 @@ export function FinalCTA() {
           <p className="mt-6 text-[15px] text-ink-muted">
             Questions? Email{" "}
             <a
-              href="mailto:chris@useoptimalai.com"
+              href="mailto:hello@openoaisis.com"
               className="underline transition-colors hover:text-ink-secondary"
             >
-              chris@useoptimalai.com
+              hello@openoaisis.com
             </a>{" "}
             — I read every one.
           </p>

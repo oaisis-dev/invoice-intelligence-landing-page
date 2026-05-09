@@ -7,12 +7,12 @@ const items = [
     a: "No. Every invoice runs a verification step before it touches your books. Anything below 95% confidence lands in a review queue your team clears in seconds. You see exactly what the system did and why.",
   },
   {
-    q: "Does it actually work with R365 and InfoSync?",
-    a: "Yes. Native exports for both, plus generic CSV for any GL. Setup takes about 20 minutes.",
+    q: "Does it actually work with Restaurant365 and DL?",
+    a: "Yes. We generate Restaurant365's AP import format and drop it via SFTP, or push directly through their API once your account is enabled. DL works the same way. Generic CSV covers anything else.",
   },
   {
     q: "What about handwritten, faxed, or weird vendor invoices?",
-    a: "Those are exactly the ones we built this for. R365 and InfoSync break on format variation. We don’t. PDFs, scans, photos, email-body invoices — if a vendor sends it, we read it.",
+    a: "Those are exactly the ones we built this for. R365 and DL break on format variation. We don’t. PDFs, scans, photos, email-body invoices — if a vendor sends it, we read it.",
   },
   {
     q: "How long is implementation?",
